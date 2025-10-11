@@ -1,0 +1,9 @@
+/* No scroll bar show but it is available*/
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import Header from './components/Header'
+import ToDoList from './components/ToDoList'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // State management for todos with localStorage persistence
+  const [todos, setTodos] = useState(() => {
+    // Load todos from localStorage on initial render
+    const savedTodos = localStorage.getItem("todos");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+
+  //Save todos to localStorage whenever they change  
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  // Handler for adding a new todo
+  function handleAddTodo(text) {
+    const newTodo = {
+      id: Date.now(),
+      text: text,
+      completed: false
+    }
+    setTodos([...todos, newTodo]);
+  }
+
+  // Handler for toggling todo completion
+  function handleToggleComplete(id) {
+    setTodos(todos.map((todo) => {
+      return todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    }));
+  }
+
+  // Handler for editing a todo 
+  function handleEditTodo(id, newText) {
+    setTodos(todos.map((todo) => {
+      return todo.id === id ? { ...todo, text: newText } : todo
+    }));
+  }
+
+  // Handler for deleting a todo
+  function handleDeleteTodo(id) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-[#212121] flex justify-center items-center">
+      <div className="relative w-full max-w-lg p-1 rounded-2xl overflow-visible bg-gradient-to-r from-[#74ebd5] to-[#acb6e5]">
+
+        {/* Inner Card */}
+        <div className="relative bg-[#080808] text-white rounded-xl p-6 flex flex-col gap-4 items-center justify-start z-10 min-h-[500px] max-h-[80vh] overflow-y-auto no-scrollbar">
+          <Header />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
-export default App
+export default App;
