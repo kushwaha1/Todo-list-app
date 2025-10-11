@@ -1,16 +1,61 @@
-# React + Vite
+# Simple To-Do List (Vite + React + Tailwind)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, accessible, and fully functional To-Do list application built with Vite and React functional components.
+Implements add, edit, delete, complete/uncomplete, localStorage persistence and small UX/accessibility improvements.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add new tasks(prevent duplicate / empty tasks)
+- Mark tasks as completed / uncompleted (toggle)
+- Edit existing tasks (inline edit, ESC to cancel)
+- Delete tasks (with confirmation)
+- Local persistence using localStorage
+- Responsive design
+- Added Todo-list fav-icon in index.html
 
-## React Compiler
+### Setup Instructions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Clone or download this repository (`git clone https://github.com/kushwaha1/Todo-list-app.git`).
+2. Run command in vscode terminal `npm i` for installing packages.
+3. Open vscode terminal and run `npm run dev`.
+4. The app will now be running at `http://localhost:5173/`.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React (functional components + hooks)
+- Vite
+- Tailwind CSS
+- Lucide React (for icons)
+
+## Project Structure
+
+* public
+  - vite.svg
+* src/
+  - assets/
+    * check-list.png
+    * to-do-list.png
+    * react.svg
+  - components/
+    * Header.jsx
+    * ToDoList.jsx
+    * ToDoItem.jsx
+  * App.jsx
+  * App.css
+  * main.jsx
+  * index.css (or tailwind setup)
+* .gitignore
+* index.html
+* README.md
+* package.json
+* package-lock.json
+* vite.config.js
+
+## How It Works
+
+1. Add a Task – Type a task name in the input box and click Add.
+    - The app saves it in localStorage and shows it in the task list.
+2. Mark Complete – Click the checkbox next to a task to mark it as completed (toggles between complete/incomplete).
+3. Edit a Task – Click the Edit icon, modify the text, and press Save or Esc/Cancel to revert.
+4. Delete a Task – Click the Trash icon, confirm the alert, and the task is permanently removed.
+5. Persistent Storage – All tasks are automatically saved in the browser’s localStorage, so they stay even after refresh.
