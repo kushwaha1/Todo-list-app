@@ -49,9 +49,23 @@ function App() {
     <div className="min-h-screen bg-[#212121] flex justify-center items-center">
       <div className="relative w-full max-w-lg p-1 rounded-2xl overflow-visible bg-gradient-to-r from-[#74ebd5] to-[#acb6e5]">
 
-        {/* Inner Card */}
+        {/* ===================== Inner Card Container =====================
+            - Dark background card where all content is displayed
+            - Scrollable when todos overflow without showing scrollable bar
+        */}
         <div className="relative bg-[#080808] text-white rounded-xl p-6 flex flex-col gap-4 items-center justify-start z-10 min-h-[500px] max-h-[80vh] overflow-y-auto no-scrollbar">
+          {/* Header Component - displays app title */}
           <Header />
+
+          {/* ToDoList Component
+              - Handles displaying todos, adding, editing, toggling, and deleting tasks */}
+          <ToDoList
+            todos={todos}
+            onAdd={handleAddTodo}
+            onToggle={handleToggleComplete}
+            onEdit={handleEditTodo}
+            onDelete={handleDeleteTodo}
+          />
         </div>
       </div>
     </div>
